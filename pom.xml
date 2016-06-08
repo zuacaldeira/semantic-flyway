@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>learn</groupId>
-    <artifactId>semantic-flyway</artifactId>
+    <groupId>org.azc.semantic</groupId>
+    <artifactId>semantic</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <ciManagement>
-        <system>hudson</system>
-        <url>http://localhost:8080/job/semantic-flyway/</url>
-    </ciManagement>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -16,9 +12,10 @@
         <db.driver>com.mysql.jdbc.Driver</db.driver>
         <db.schema>semantic</db.schema>
         <mysql.version>5.1.31</mysql.version> 
-        <db.url>jdbc:mysql://localhost:3306/lifetime?zeroDateTimeBehavior=convertToNull</db.url>
+        <db.url>jdbc:mysql://localhost:3306/semantic?zeroDateTimeBehavior=convertToNull</db.url>
         <db.username>zua</db.username>
         <db.password>unicidade</db.password>
+        <spring.boot.version>1.3.5.RELEASE</spring.boot.version>
     </properties>
     
     <dependencies>
@@ -48,66 +45,49 @@
             <artifactId>flyway-core</artifactId>
             <version>4.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.jooq</groupId>
+            <artifactId>jooq-codegen</artifactId>
+            <version>3.8.1</version>
+            <type>jar</type>
+        </dependency>
+        <!-- SPRING DEPENDENCIES -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency>      
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <version>${spring.boot.version}</version>
+            <optional>true</optional>
+        </dependency>
+  
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring.boot.version}</version>
+            <scope>test</scope>
+        </dependency>      
     </dependencies>
     
     <build>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.9</version>
-                <executions>
-                    <execution>
-                        <id>add-source</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>src/main/java</source>
-                            </sources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- maven exec plug in -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.3.1</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <systemProperties>
-                        <systemProperty>
-                            <key>jdbc.driver</key>
-                            <value>${db.driver}</value>
-                        </systemProperty>
-                        <systemProperty>
-                            <key>jdbc.user</key>
-                            <value>${db.user}</value>
-                        </systemProperty>
-                        <systemProperty>
-                            <key>jdbc.password</key>
-                            <value>${db.password}</value>
-                        </systemProperty>
-                        <systemProperty>
-                            <key>jdbc.url</key>
-                            <value>${db.url}</value>
-                        </systemProperty>
-                        <systemProperty>
-                            <key>jdbc.database.name</key>
-                            <value>${db.schema}</value>
-                        </systemProperty>
-                    </systemProperties>
-                </configuration>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>1.3.5.RELEASE</version>
             </plugin>
         </plugins>
         <resources>

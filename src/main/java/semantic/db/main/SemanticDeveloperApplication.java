@@ -5,22 +5,23 @@
  */
 package semantic.db.main;
 
-import org.flywaydb.core.Flyway;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  *
  * @author zuacaldeira
  */
-public class Migrate {
+@SpringBootApplication
+public class SemanticDeveloperApplication {
 
     private static final String USER = "zua";
     private static final String PASSWORD = "unicidade";
     private static final String URL = "jdbc:mysql://localhost:3306/semantic?zeroDateTimeBehavior=convertToNull";
 
-    public static void main(String[] args) {
-        System.out.println("Migrate.main()");
-        Flyway flyway = new Flyway();
-        flyway.setDataSource(URL, USER, PASSWORD);
-        flyway.migrate();
+    public static void main2(String[] args) {
+        System.out.println("SemanticDeveloperApplication.main()");
+        //FlywayMigrations.migrate(URL, USER, PASSWORD);
+        
+        //ApplicationContext context = SpringApplication.run(SemanticDeveloperApplication.class, args);
     }
 }

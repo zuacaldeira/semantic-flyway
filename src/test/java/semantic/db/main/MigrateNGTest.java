@@ -18,15 +18,14 @@ public class MigrateNGTest {
     }
 
     /**
-     * Test of main method, of class Migrate.
+     * Test of main method, of class SemanticDeveloperApplication.
      */
     @Test
-    public void testMain() {
-        System.out.println("main");
-        String[] args = null;
+    public void testMain2() {
+        System.out.println("Test main".toUpperCase());
+        String[] args = new String[]{};
         try {
-            Migrate.main(args);
-            System.out.println("Migration TEST success".toUpperCase());
+            SemanticDeveloperApplication.main2(args);
         } catch(Throwable t) {
             fail("Flyway Migration execution failed", t);
         }
